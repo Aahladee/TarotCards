@@ -1,0 +1,23 @@
+export const images = {
+    1: require('./1.webp'),
+    2: require('./2.jpg'),
+    3: require('./3.jpg'),
+    4: require('./4.webp'),
+    5: require('./5.jpg'),
+    6: require('./6.webp'),
+    7: require('./7.jpg'),
+    8: require('./8.jpg'),
+    9: require('./9.webp'),
+    10: require('./10.jpg'),
+    11: require('./11.webp'),
+    12: require('./12.jpg'),
+    13: require('./13.webp'),
+    14: require('./14.jpg'),
+    15: require('./15.jpg'),
+    16: require('./16.jpg'),
+    17: require('./17.jpg'),
+    18: require('./18.webp'),
+    19: require('./19.jpg'),
+    20: require('./20.jpg'),
+    
+}
