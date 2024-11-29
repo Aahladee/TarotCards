@@ -76,10 +76,18 @@ function TarotCard({
   isFlipped,
 }) {
   const mounted = useSharedValue(0)
+  const flipAnimation = useSharedValue(0)
+  const [isFlippedLocal, setIsFlippedLocal] = useState(false)
 
   useEffect(() => {
     mounted.value = withTiming(1, { duration: 500 })
   }, [])
+
+  useEffect(() => {
+    if (isFlippedLocal) {
+      flipAnimation.value = withTiming(180, { duration: 800 })
+    }
+  }, [isFlippedLocal])
 
   const stylez = useAnimatedStyle(() => {
     return {
@@ -99,9 +107,13 @@ function TarotCard({
             Extrapolate.CLAMP,
           ),
         },
+        { perspective: 1000 },
+        { rotateY: `${flipAnimation.value}deg` }
       ],
     }
   })
+
+  
 
   return (
     <Animated.View
@@ -119,12 +131,16 @@ function TarotCard({
         stylez,
       ]}
     >
-      <TouchableOpacity onPress={() => onCardClick(cardIndex)}>
-        <Image
+      <TouchableOpacity onPress={() => {onCardClick(cardIndex); setIsFlippedLocal(true)}}>
+        {isFlippedLocal ? <Image
           key={card.key}
-          source={{ uri: isFlipped ? selectedCardImg : card.uri }}
+          source={  card.flippedUri}
           style={styles.tarotCardBackImage}
-        />
+        />: <Image
+          key={card.key}
+          source={{ uri: card.uri }}
+          style={styles.tarotCardBackImage}
+        />}
       </TouchableOpacity>
     </Animated.View>
   )
@@ -232,7 +248,9 @@ export function TarotCards() {
 
     const handleCardClick = (cardIndex) => {
       if (cardIndex === activeCardIndex) {
-        setIsFlipped(true)
+        
+        setTimeout(() => {
+          setIsFlipped(true);
         setIsWheelDisabled(true)
         setSelectedCards((prevSelectedCards) => {
           const newSelectedCards = [...prevSelectedCards, tarotCards[cardIndex]]
@@ -247,7 +265,8 @@ export function TarotCards() {
             }, 3000)
           }
           return newSelectedCards
-        })
+          })
+        }, 1500)
       }
     }
   
