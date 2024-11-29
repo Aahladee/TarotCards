@@ -302,9 +302,6 @@ export function TarotCards() {
               <Text style={styles.selectedCardText}>
                 You have selected {tarotCards[activeCardIndex].key}
               </Text>
-              {/* <TouchableOpacity onPress={handleWheelRefresh}>
-                <Text style={styles.refreshText}>Select Another Card</Text>
-              </TouchableOpacity> */}
             </View>
           )}
   
