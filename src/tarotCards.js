@@ -132,7 +132,7 @@ function TarotCard({
         stylez,
       ]}
     >
-      <TouchableOpacity onPress={() => { onCardClick(cardIndex); 
+      {/* <TouchableOpacity onPress={() => { onCardClick(cardIndex); 
         // setIsFlippedLocal(true) 
         }}>
         {
@@ -146,7 +146,30 @@ function TarotCard({
           source={{ uri: card.uri }}
           style={styles.tarotCardBackImage}
         />}
-      </TouchableOpacity>
+      </TouchableOpacity> */}
+
+        <FlipCard
+        friction={6}
+        perspective={1000}
+        flipHorizontal={true}
+        flipVertical={false}
+        flip={isFlipped}
+        clickable={true}
+        onFlipEnd={() => onCardClick(cardIndex)}
+      >
+        {/* Front Side */}
+        <Image
+          key={`front-${card.key}`}
+          source={{ uri: card.uri }}
+          style={styles.tarotCardBackImage}
+        />
+        {/* Back Side */}
+        <Image
+          key={`back-${card.key}`}
+          source={card.flippedUri}
+          style={styles.tarotCardBackImage}
+        />
+      </FlipCard>
     </Animated.View>
   )
 }
